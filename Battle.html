@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Signika:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./CSS/Battle.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="background">
+        <!-- health point display-->
+        <div id="PH-area">
+            <div id="PH-area-user" class="PH-area-health">
+                <p id="PH-area-user-name" class="PH-area-health-name">USER</p>
+                <div id="PH-area-user-health-bar" class="PH-area-health-bar">
+                    <div id="PH-area-user-health-bar-content" class="PH-area-health-bar-content"></div>
+                </div>
+                <div id="PH-area-user-health-point" class="PH-area-health-point">
+                    <span id="PH-area-user-health-piont-left" class="PH-area-health-piont-left">120</span>/<span id="PH-area-user-health-piont-max" class="PH-area-health-point-max">200</span>
+                </div>
+            </div>
+            <div id="PH-area-com" class="PH-area-health">
+                <p id="PH-area-com-name" class="PH-area-health-name">COM</p>
+                <div id="PH-area-com-health-bar" class="PH-area-health-bar">
+                    <div id="PH-area-com-health-bar-content" class="PH-area-health-bar-content"></div>
+                </div>
+                <div id="PH-area-com-health-point" class="PH-area-health-point">
+                    <span id="PH-area-com-health-piont-left" class="PH-area-health-piont-left">180</span>/ <span id="PH-area-user-health-piont-max" class="PH-area-health-point-max">250</span>
+                </div>
+            </div>
+        </div>
+        <!-- move timer display-->
+        <div id="timer">
+            <div class="timer-bar">
+                <div class="timer-bar-current" id="timer-com-bar-current">
+                    <img src="./images/kubfu.png" alt="" class="timer-bar-current-img" id="timer-com-bar-current-img">
+                </div>
+                <div class="timer-bar-current" id="timer-user-bar-current">
+                    <img src="./images/scorbunny.png" alt="" class="timer-bar-current-img" id="timer-user-bar-current-img">
+                </div>
+            </div>
+        </div>
+
+
+        <div id="battle-area">
+            <div id="battle-area-user"></div>
+            <div id="battle-area-com"></div>
+        </div>
+    </div>
+
+    <script src="./JS/Battle.js"></script>
+</body>
+
+</html>
