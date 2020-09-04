@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Signika:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Signika:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./CSS/Battle.css">
     <title>Document</title>
 </head>
@@ -45,9 +45,49 @@
         </div>
 
 
-        <div id="battle-area">
-            <div id="battle-area-user"></div>
-            <div id="battle-area-com"></div>
+        <div id="battle">
+            <div id="battle-area-user" class="battle-area">
+                <div id="battle-area-user-character" class="battle-area-character">
+                    <img src="./images/characterF.png" alt="" id="battle-area-user-character-img" class="battle-area-character-img">
+                    <div id="battle-area-user-character-btn" class="battle-area-character-btn"></div>
+                </div>
+                <div id="battle-area-user-pokemon" class="battle-area-pokemon">
+                    <img src="./images/scorbunny.png" alt="" id="battle-area-user-pokemon-img" class="battle-area-pokemon-img">
+                    <div class="move-status" id="move-status-user">
+                        <p class="move-status-text" id="move-status-user-text1">ATTACK: +20</p>
+                        <p class="move-status-text" id="move-status-user-text1">PH:-25</p>
+                    </div>
+                </div>
+                <div id="battle-area-user-btn" class="battle-area-btn">
+                    <button id="attack">ATTACK / A</button>
+                    <button id="buff">BUFF / B</button>
+                    <button id="stop">STOP / S</button>
+                    <button id="healing">MEDICINE / M</button>
+                </div>
+                <div id="battle-area-user-skill" class="battle-area-skill">
+                    <div id="spirit-bar-max">
+                        <div id="spirit-bar-max-current"></div>
+                    </div>
+                    <button id="skill-btn">skill-btn</button>
+                </div>
+                <div id="battle-area-user-status" class="battle-area-status"></div>
+            </div>
+            <div id="battle-area-com" class="battle-area">
+                <div id="battle-area-com-character" class="battle-area-character">
+                    <img src="./images/bea.png" alt="" id="battle-area-com-character-img" class="battle-area-character-img">
+                    <button id="battle-area-com-character-btn" class="battle-area-character-btn"></button>
+                </div>
+                <div id="battle-area-com-pokemon" class="battle-area-pokemon">
+                    <img src="./images/kubfu.png" alt="" id="battle-area-com-pokemon-img" class="battle-area-pokemon-img">
+                    <div class="move-status" id="move-status-com">
+                        <p class="move-status-text" id="move-status-com-text1">PH:-50</p>
+                        <p class="move-status-text" id="move-status-com-text1">DEFENSE:-10</p>
+                    </div>
+                </div>
+                <div id="battle-area-com-btn" class="battle-area-btn"></div>
+                <div id="battle-area-com-status" class="battle-area-status"></div>
+                <div id="battle-area-com-skill" class="battle-area-skill"></div>
+            </div>
         </div>
     </div>
 

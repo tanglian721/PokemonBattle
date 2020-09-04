@@ -3,10 +3,20 @@
   padding: 0;
 }
 
+p {
+  font-family: 'Signika', sans-serif;
+  font-size: 1rem;
+  color: white;
+  font-weight: lighter;
+}
+
 #background {
+  background-image: url(../images/battle1Backgroud.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
   width: 100vw;
   height: 100vh;
-  background-color: aqua;
   position: relative;
 }
 
@@ -36,6 +46,7 @@
 #PH-area .PH-area-health-name, #PH-area .PH-area-health-point {
   font-size: 1rem;
   font-family: 'Signika', sans-serif;
+  color: white;
 }
 
 #PH-area-user {
@@ -111,30 +122,199 @@
   margin-left: -2vw;
 }
 
-#battle-area {
+#battle {
   width: 90vw;
   height: 84vh;
-  background-color: chartreuse;
   position: absolute;
   left: 10vw;
   bottom: 0;
 }
 
+#battle p {
+  font-family: 'Signika', sans-serif;
+  font-size: 1rem;
+  color: white;
+  font-weight: lighter;
+}
+
 #battle-area-user {
   width: 80vw;
   height: 50vh;
-  background-color: darkorange;
   position: absolute;
   left: 0;
   bottom: 0;
 }
 
+#battle-area-user-character {
+  z-index: 20;
+  position: absolute;
+  width: 30vw;
+  height: 50vh;
+  bottom: 5vh;
+}
+
+#battle-area-user-character img {
+  width: 30vw;
+  position: absolute;
+  bottom: 0;
+}
+
+#battle-area-user-character div {
+  width: 10vw;
+  height: 10vw;
+  background-image: url(../images/pokeBall.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  position: absolute;
+  left: 35vw;
+  bottom: 8vh;
+}
+
+#battle-area-user-pokemon {
+  z-index: 10;
+  width: 50vw;
+  height: 30vh;
+  position: absolute;
+  left: 30vw;
+}
+
+#battle-area-user-pokemon img {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 20vw;
+}
+
+#battle-area-user-pokemon div {
+  position: absolute;
+  width: 30vw;
+  left: 20vw;
+  bottom: 10vw;
+}
+
+#battle-area-user-pokemon div p {
+  font-family: 'Signika', sans-serif;
+  font-size: 1rem;
+  color: white;
+}
+
+#battle-area-user-btn {
+  width: 30vw;
+  height: 20vh;
+  position: absolute;
+  right: -6vw;
+  bottom: 0;
+}
+
+#battle-area-user-btn #attack {
+  background-color: red;
+}
+
+#battle-area-user-btn #buff {
+  background-color: blue;
+}
+
+#battle-area-user-btn #stop {
+  background-color: purple;
+}
+
+#battle-area-user-btn #healing {
+  background-color: green;
+}
+
+#battle-area-user-btn button {
+  width: 30vw;
+  height: 4vh;
+  color: white;
+  border-radius: 2vh;
+  display: block;
+  margin-bottom: 1vh;
+}
+
+#battle-area-user-skill {
+  width: 50vw;
+  height: 10vh;
+  position: absolute;
+  bottom: 0;
+  left: 3vw;
+}
+
+#battle-area-user-skill #spirit-bar-max {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  width: 50vw;
+  height: 3vh;
+  border: 1px solid black;
+  border-radius: 1.5vh;
+  overflow: hidden;
+  position: absolute;
+  bottom: 1vh;
+}
+
+#battle-area-user-skill #spirit-bar-max-current {
+  width: 22vw;
+  height: 3vh;
+  background-color: red;
+  border-radius: 1.5vh;
+}
+
+#battle-area-user-skill button {
+  width: 15vw;
+  height: 5vh;
+  position: absolute;
+  left: 30vw;
+}
+
 #battle-area-com {
   width: 60vw;
   height: 30vh;
-  background-color: red;
   position: absolute;
   right: 0;
   top: 0;
+}
+
+#battle-area-com-character {
+  z-index: 5;
+  position: absolute;
+  width: 20vw;
+  height: 30vh;
+  right: 0;
+}
+
+#battle-area-com-character img {
+  width: 20vw;
+  position: absolute;
+  bottom: 0;
+}
+
+#battle-area-com-character button {
+  display: none;
+}
+
+#battle-area-com-pokemon {
+  z-index: 10;
+  width: 50vw;
+  height: 30vh;
+  position: absolute;
+  right: 20vw;
+}
+
+#battle-area-com-pokemon img {
+  position: absolute;
+  bottom: 10vh;
+  right: 0;
+  width: 18vw;
+}
+
+#battle-area-com-pokemon div {
+  position: absolute;
+  width: 30vw;
+  right: 18vw;
+  bottom: 15vH;
+}
+
+#battle-area-com-pokemon div p {
+  text-align: right;
 }
 /*# sourceMappingURL=Battle.css.map */
