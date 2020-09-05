@@ -42,33 +42,37 @@
                     <img src="./images/scorbunny.png" alt="" class="timer-bar-current-img" id="timer-user-bar-current-img">
                 </div>
             </div>
+
         </div>
 
-
+        <button id="start-battle" onclick="TimerStart()">start battle</button>
         <div id="battle">
             <div id="battle-area-user" class="battle-area">
                 <div id="battle-area-user-character" class="battle-area-character">
                     <img src="./images/characterF.png" alt="" id="battle-area-user-character-img" class="battle-area-character-img">
-                    <div id="battle-area-user-character-btn" class="battle-area-character-btn" onclick="TimerStart()"></div>
+
                 </div>
                 <div id="battle-area-user-pokemon" class="battle-area-pokemon">
                     <img src="./images/scorbunny.png" alt="" id="battle-area-user-pokemon-img" class="battle-area-pokemon-img">
                     <div class="move-status" id="move-status-user">
                         <p class="move-status-text" id="user-PH-Damage">ATTACK: +20</p>
-                        <p class="move-status-text" id="move-status-user-text2">PH:-25</p>
+                        <p class="move-status-text" id="user-attribute-change">PH:-25</p>
+                        <p class="move-status-text" id="user-round-info">PH:-25</p>
                     </div>
                 </div>
                 <div id="battle-area-user-btn" class="battle-area-btn">
+                    <div id="battle-area-user-character-btn" class="battle-area-character-btn" onclick="CatchPokemon()"></div>
                     <button id="attack" onclick="UserAttack()">ATTACK / A</button>
                     <button id="buff" onclick="UserBuffAttack()">BUFF / B</button>
                     <button id="stop" onclick="UserStopAttack()">STOP / S</button>
                     <button id="healing" onclick="UserHealing()">MEDICINE / M</button>
+                    <button id="skill-btn" onclick="UserSkillAttack()">skill-btn</button>
                 </div>
                 <div id="battle-area-user-skill" class="battle-area-skill">
                     <div id="spirit-bar-max">
                         <div id="spirit-bar-max-current"></div>
                     </div>
-                    <button id="skill-btn" onclick="UserSkillAttack()">skill-btn</button>
+
                 </div>
                 <div id="battle-area-user-status" class="battle-area-status"></div>
             </div>
@@ -80,8 +84,9 @@
                 <div id="battle-area-com-pokemon" class="battle-area-pokemon">
                     <img src="./images/kubfu.png" alt="" id="battle-area-com-pokemon-img" class="battle-area-pokemon-img">
                     <div class="move-status" id="move-status-com">
-                        <p class="move-status-text" id="move-status-com-text1">PH:-50</p>
-                        <p class="move-status-text" id="move-status-com-text2">DEFENSE:-10</p>
+                        <p class="move-status-text" id="com-PH-Damage">ATTACK: +20</p>
+                        <p class="move-status-text" id="com-attribute-change">PH:-25</p>
+                        <p class="move-status-text" id="com-round-info">PH:-25</p>
                     </div>
                 </div>
                 <div id="battle-area-com-btn" class="battle-area-btn"></div>
