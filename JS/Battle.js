@@ -9,6 +9,7 @@ let scorbunny = {
     buff: 20,
     debuff: 10,
     skillName: 'double kick',
+    skillAttack: 'userAttack * 2',
     levelOneImgPath: '../images/scorbunny-level1.png',
     levelTwoImgPath: '../images/scorbunny-level2.png',
     levelThreeImgPath: '../images/scorbunny-level3.png',
@@ -34,37 +35,41 @@ let kubfu = {
 /* set user variable */
 let userName = scorbunny.name;
 let userPHmax = scorbunny.PHmax;
-let userPHcurrent = userPHmax;
-let userAttackMax = scorbunny.attackMax;
-let userAttackMin = scorbunny.attackMin;
-let userDefense = scorbunny.defense;
-let userSpeed = scorbunny.speed;
-let userSkipNum = scorbunny.skipNum;
+let userPHcurrent = userPHmax; //need cookie
+let userAttackMax = scorbunny.attackMax; //need cookie
+let userAttackMin = scorbunny.attackMin; //need cookie
+let userDefense = scorbunny.defense; //need cookie
+let userSpeed = scorbunny.speed; //need cookie
+let userSkipNum = scorbunny.skipNum; //need cookie
 let userBuff = scorbunny.buff;
 let userDebuff = scorbunny.debuff;
 let userSkillName = scorbunny.skillName;
-let userLevelOneImgPath = scorbunny.levelOneImgPath;
-let userLevelTwoImgPath = scorbunny.levelTwoImgPath;
-let userLevelThreeImgPath = scorbunny.levelThreeImgPath;
+let userImgPath = scorbunny.levelOneImgPath; //need cookie
 let userBackGroundPath = scorbunny.backGroundPath;
+let userSkillAttack;
 let userAttack;
 let userDamage;
+let userSpiritPoint = 0; //need cookie
+let userRestStopRound = -1;
+let userRestBuffRound = -1;
 
 let userNameDisplay = document.getElementById('PH-area-user-name');
 let userHealthPrecent = userPHcurrent / userPHmax;
 let userHealthBarDisplay = document.getElementById('PH-area-user-health-bar-content');
 let userHealthPointDisplay = document.getElementById("PH-area-user-health-point-left");
 let userHealthPointMax = document.getElementById('PH-area-user-health-point-max');
+let userSpiritPiontDisplay = document.getElementById('spirit-bar-max-current');
+let userSkillBtnName = document.getElementById('skill-btn');
 
 /* set com variable */
 let comName = kubfu.name;
 let comPHmax = kubfu.PHmax;
-let comPHcurrent = comPHmax;
-let comAttackMax = kubfu.attackMax;
-let comAttackMin = kubfu.attackMin;
-let comDefense = kubfu.defense;
-let comSpeed = kubfu.speed;
-let comLevelOneImgPath = kubfu.levelOneImgPath;
+let comPHcurrent = comPHmax; //need cookie
+let comAttackMax = kubfu.attackMax; //need cookie
+let comAttackMin = kubfu.attackMin; //need cookie
+let comDefense = kubfu.defense; //need cookie
+let comSpeed = kubfu.speed; //need cookie
+let comImgPath = kubfu.levelOneImgPath;
 let comAttack;
 let comDamage;
 
@@ -73,19 +78,38 @@ let comHealthPrecent = comPHcurrent / comPHmax;
 let comHealthBarDisplay = document.getElementById('PH-area-com-health-bar-content');
 let comHealthPointDisplay = document.getElementById("PH-area-com-health-point-left");
 let comHealthPointMax = document.getElementById('PH-area-com-health-point-max');
-console.log(comHealthPrecent);
+let statusDisplay2 = document.getElementById('move-status-com-text2');
+let userPHDamageDisplay = document.getElementById('user-PH-Damage');
+
 /*declare other variable */
-let userTimerNum = 0;
-let comTimerNum = 0;
+let userTimerNum = 0; //need cookie
+let comTimerNum = 0; //need cookie
 let userSpiritBar = document.getElementById('timer-user-bar-current');
 let comSpiritBar = document.getElementById('timer-com-bar-current');
 let userMoveBtn = document.getElementById('battle-area-user-btn');
 let userArea = document.getElementById('battle-area-user');
+let medicine = 50;
 
+
+
+/*set background status */
+document.body.style.backgroundImage = "URL('../images/battle1Backgroud.jpg')"; //How to use a variable in right quote?
+
+userNameDisplay.innerHTML = userName.toUpperCase(); //user name display
+UserHealthDisplay(); //initial user health display
+
+comNameDisplay.innerHTML = comName.toUpperCase(); //com name display
+ComHealthDisplay(); //initial com health display
+// userMoveBtn.style.display = "none"; // do not display the move button 
+// userSkillBtnName.style.display = "none"; // do not display the skill button
+UserSpiritCheck(); //initial user spirit display
+statusDisplay2.style.display = "none";
+userPHDamageDisplay.style.display = "none";
+console.log(userAttackMax);
+console.log(userAttackMin);
 /* status functions start*/
 /* user health  display*/
 function UserHealthDisplay() {
-    userNameDisplay.innerHTML = userName.toUpperCase();
     userHealthPrecent = userPHcurrent / userPHmax;
     userHealthBarDisplay.style.width = userHealthPrecent * 60 + 'vw';
     if (userHealthPrecent >= 0.8) {
@@ -105,7 +129,6 @@ function UserHealthDisplay() {
 
 /* com health display*/
 function ComHealthDisplay() {
-    comNameDisplay.innerHTML = comName.toUpperCase();
     comHealthPrecent = comPHcurrent / comPHmax;
     comHealthBarDisplay.style.width = comHealthPrecent * 60 + 'vw';
     if (comHealthPrecent >= 0.8) {
@@ -146,7 +169,7 @@ function TimerStart() {
             // setTimeout(clearInterval(comTimer), 2000);
         } else {
             userSpiritBar.style.height = userTimerNum + "vh";
-            console.log(userTimerNum);
+            // console.log(userTimerNum);
         }
     }
 
@@ -161,50 +184,171 @@ function TimerStart() {
             // setTimeout(clearInterval(comTimer), 2000);
         } else {
             comSpiritBar.style.height = comTimerNum + "vh";
-            console.log(comTimerNum);
+            // console.log(comTimerNum);
         }
     }
 
 
 }
 
+/*spirit gathering */
+function UserSpiritGatheringBar() {
+    userSpiritPoint = (Math.floor(Math.random() * (30 - 10)) + 10) + userSpiritPoint;
+    console.log(userSpiritPoint);
+    if (userSpiritPoint >= 100) {
+        userSpiritPoint = 100;
+    }
+    UserSpiritCheck();
+}
 
+function UserSpiritCheck() {
+    if (userSpiritPoint >= 100) {
+        userSkillBtnName.style.display = "block";
+        userSkillBtnName.innerHTML = userSkillName + " / T";
+        userSpiritPiontDisplay.style.width = userSpiritPoint / 2 + "vw";
+    } else {
+        userSpiritPiontDisplay.style.width = userSpiritPoint / 2 + "vw";
+
+        if (userSpiritPoint === 100) {
+            userSpiritPiontDisplay.style.backgroundColor = "#FF0000";
+        } else if (userSpiritPoint >= 75) {
+            userSpiritPiontDisplay.style.backgroundColor = "#FF4000";
+            console.log(userSpiritPoint);
+        } else if (userSpiritPoint >= 50) {
+            userSpiritPiontDisplay.style.backgroundColor = "#FF5E00";
+        } else if (userSpiritPoint >= 25) {
+            userSpiritPiontDisplay.style.backgroundColor = "#FFB300";
+        } else {
+            userSpiritPiontDisplay.style.backgroundColor = "#FFFF00";
+        }
+    }
+
+
+}
+/* Stop round check */
+function StopRoundCheck() {
+    if (userRestStopRound < 0) {
+        userRestStopRound = -1;
+        statusDisplay2.style.display = 'none';
+        comSpeed = kubfu.speed;
+    } else if (userRestStopRound === 0) {
+        statusDisplay2.style.display = 'block';
+        statusDisplay2.innerHTML = 'Stop round left : ' + userRestStopRound;
+        userRestStopRound--;
+        comSpeed = kubfu.speed;
+        setTimeout(() => {
+            statusDisplay2.style.display = 'none';
+        }, 2000);
+    } else {
+        statusDisplay2.style.display = 'block';
+        statusDisplay2.innerHTML = 'Stop round left : ' + userRestStopRound;
+        userRestStopRound--;
+    }
+}
+
+/* Buff Round Check */
+function BuffRoundCheck() {
+    if (userRestBuffRound === 0) {
+        userRestBuffRound = -1;
+        userAttackMax = userAttackMax - userBuff;
+        userAttackMin = userAttackMin - userBuff;
+        comDefense = comDefense + userDebuff;
+    } else {
+        userRestBuffRound--;
+    }
+}
 /* status functions end*/
 
 
 
 
 
-/*set background status */
-document.body.style.backgroundImage = "URL('../images/battle1Backgroud.jpg')"; //How to use a variable in right quote?
-
-userNameDisplay.innerHTML = userName.toUpperCase(); //user name display
-UserHealthDisplay(); //initial user health display
-
-comNameDisplay.innerHTML = comName.toUpperCase(); //com name display
-ComHealthDisplay(); //initial com health display
-userMoveBtn.style.display = "none";
-
 
 
 /* move function */
-function UserAttack() {
+function UserAttack() { // user noraml attack
+    console.log(userAttackMax);
+    console.log(userAttackMin);
+    console.log(userRestBuffRound);
+    StopRoundCheck();
+    BuffRoundCheck();
+    console.log(userAttackMax);
+    console.log(userAttackMin);
     userAttack = Math.floor(Math.random() * (userAttackMax - userAttackMin)) + userAttackMin;
     comDamage = userAttack - comDefense;
     comPHcurrent = comPHcurrent - comDamage;
     ComHealthDisplay();
-    console.log(comPHcurrent);
-    console.log(comHealthPrecent);
+    UserSpiritGatheringBar();
     setTimeout(TimerStart, 2000);
-
-
 }
 
-function ComAttack() {
+function ComAttack() { // com normal  attack
     comAttack = Math.floor(Math.random() * (comAttackMax - comAttackMin)) + comAttackMin;
     userDamage = comAttack - userDefense;
     userPHcurrent = userPHcurrent - userDamage;
     UserHealthDisplay();
     setTimeout(TimerStart, 2000);
+}
+/* user skill attack */
+function UserSkillAttack() {
+    StopRoundCheck();
+    BuffRoundCheck();
+    userAttack = Math.floor(Math.random() * (userAttackMax - userAttackMin)) + userAttackMin;
+    console.log(userSkillName);
+    if (userSkillName === "double kick") {
+        userSkillAttack = userAttack * 2;
+    } else if (userSkillName = "Knock Off") {
+        userSkillAttack = userAttack + 50;
+    } else if (userSkillName = "Water Gun") {
+        userSkillAttack = userAttack + comDefense;
+    } else {
+        userSkillAttack = userAttack;
+    }
+    comDamage = userSkillAttack - comDefense;
 
+    userSpiritPoint = 0;
+    console.log(comDamage);
+    ComHealthDisplay();
+    UserSpiritCheck();
+    setTimeout(TimerStart, 2000);
+}
+
+/*user stop com move */
+function UserStopAttack() {
+    comSpeed = 100000000;
+    userRestStopRound = userSkipNum;
+    console.log(comSpeed);
+    StopRoundCheck();
+    ComHealthDisplay();
+    UserSpiritCheck();
+    setTimeout(TimerStart, 2000);
+}
+
+/* buff attack */
+function UserBuffAttack() {
+    userAttackMax = userAttackMax + userBuff;
+    userAttackMin = userAttackMin + userBuff;
+    comDefense = comDefense - userDebuff;
+    userRestBuffRound = 3;
+    ComHealthDisplay();
+    UserSpiritCheck();
+    setTimeout(TimerStart, 2000);
+}
+
+/*healing */
+function UserHealing() {
+    StopRoundCheck();
+    BuffRoundCheck();
+    userPHcurrent = userPHcurrent + medicine;
+    if (userPHcurrent >= userPHmax) {
+        userPHcurrent = userPHmax;
+    }
+    userPHDamageDisplay.style.display = "block";
+    userPHDamageDisplay.innerHTML = "+ PH" + medicine;
+    setTimeout(() => {
+        userPHDamageDisplay.style.display = "none";
+    }, 2000);
+    UserHealthDisplay();
+    UserSpiritCheck();
+    setTimeout(TimerStart, 2000);
 }
