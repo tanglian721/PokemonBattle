@@ -13,7 +13,7 @@ p {
 body {
     width: 100vw;
     height: 100vh;
-    background-image: url(../images/battle1Backgroud.jpg);
+    // background-image: url(../images/battle1Backgroud.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -37,7 +37,7 @@ body {
             width: 60vw;
             height: 3vh;
             box-sizing: border-box;
-            border: 2px solid black;
+            border: 2px solid rgb(255, 255, 255);
             border-radius: 2vh;
             margin-left: 5vw;
             overflow: hidden;
@@ -45,6 +45,7 @@ body {
                 width: 20vw; //need reset after finish
                 height: 3vh;
                 background-color: red; // need delete after finish
+                transition: all 0.5s linear;
             }
         }
         &-name,
@@ -91,15 +92,15 @@ body {
         box-sizing: border-box;
         width: 6vw;
         height: 60vh;
-        border: 2px solid black;
+        border: 2px solid white;
         border-radius: 0 0 3vw 3vw;
         margin-left: 2vw;
         display: flex;
         transform: rotate(180deg);
         &-current {
-            height: 30vh; //need reset after finish
+            height: 0; //need reset after finish
             width: 3vw;
-            background-color: cadetblue;
+            background-color: rgb(255, 115, 0);
             position: relative;
             &-img {
                 width: 5vw;
@@ -110,8 +111,8 @@ body {
         }
     }
     #timer-com-bar-current {
-        background-color: gold; //need delete after finish
-        height: 40vh; //need reset after finish
+        background-color: rgb(0, 255, 234); //need delete after finish
+        height: 0; //need reset after finish
         &-img {
             margin-left: -2vw; //adjust pictrue position
         }
@@ -138,6 +139,7 @@ body {
         position: absolute;
         left: 0;
         bottom: 0;
+        transition: all 0.5s linear;
         &-character {
             z-index: 20;
             position: absolute;
@@ -228,7 +230,7 @@ body {
                 box-sizing: border-box;
                 width: 50vw;
                 height: 3vh;
-                border: 1px solid black;
+                border: 1px solid white;
                 border-radius: 1.5vh;
                 overflow: hidden;
                 position: absolute;
@@ -253,7 +255,7 @@ body {
         height: 30vh;
         // background-color: red; // need delete after finish
         position: absolute;
-        right: 0;
+        right: 5vw;
         top: 0;
         &-character {
             z-index: 5;

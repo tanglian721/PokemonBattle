@@ -19,7 +19,7 @@
                     <div id="PH-area-user-health-bar-content" class="PH-area-health-bar-content"></div>
                 </div>
                 <div id="PH-area-user-health-point" class="PH-area-health-point">
-                    <span id="PH-area-user-health-piont-left" class="PH-area-health-piont-left">120</span>/<span id="PH-area-user-health-piont-max" class="PH-area-health-point-max">200</span>
+                    <span id="PH-area-user-health-point-left" class="PH-area-health-point-left">120</span>/<span id="PH-area-user-health-point-max" class="PH-area-health-point-max">200</span>
                 </div>
             </div>
             <div id="PH-area-com" class="PH-area-health">
@@ -28,7 +28,7 @@
                     <div id="PH-area-com-health-bar-content" class="PH-area-health-bar-content"></div>
                 </div>
                 <div id="PH-area-com-health-point" class="PH-area-health-point">
-                    <span id="PH-area-com-health-piont-left" class="PH-area-health-piont-left">180</span>/ <span id="PH-area-user-health-piont-max" class="PH-area-health-point-max">250</span>
+                    <span id="PH-area-com-health-point-left" class="PH-area-health-point-left">180</span>/ <span id="PH-area-com-health-point-max" class="PH-area-health-point-max">250</span>
                 </div>
             </div>
         </div>
@@ -49,7 +49,7 @@
             <div id="battle-area-user" class="battle-area">
                 <div id="battle-area-user-character" class="battle-area-character">
                     <img src="./images/characterF.png" alt="" id="battle-area-user-character-img" class="battle-area-character-img">
-                    <div id="battle-area-user-character-btn" class="battle-area-character-btn"></div>
+                    <div id="battle-area-user-character-btn" class="battle-area-character-btn" onclick="TimerStart()"></div>
                 </div>
                 <div id="battle-area-user-pokemon" class="battle-area-pokemon">
                     <img src="./images/scorbunny.png" alt="" id="battle-area-user-pokemon-img" class="battle-area-pokemon-img">
@@ -59,7 +59,7 @@
                     </div>
                 </div>
                 <div id="battle-area-user-btn" class="battle-area-btn">
-                    <button id="attack">ATTACK / A</button>
+                    <button id="attack" onclick="UserAttack()">ATTACK / A</button>
                     <button id="buff">BUFF / B</button>
                     <button id="stop">STOP / S</button>
                     <button id="healing">MEDICINE / M</button>
