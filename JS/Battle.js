@@ -13,6 +13,7 @@ let scorbunny = {
     levelOneImgPath: '../images/scorbunny-level1.png',
     levelTwoImgPath: '../images/scorbunny-level2.png',
     levelThreeImgPath: '../images/scorbunny-level3.png',
+    skillImgPath: '../images/scorbunny-final.png',
     backGroundPath: '../images/battle1Backgroud.jpg'
 }
 let kubfu = {
@@ -52,6 +53,9 @@ let userDamage;
 let userSpiritPoint = 0; //need cookie
 let userRestStopRound = -1;
 let userRestBuffRound = -1;
+let userLevelOneImg = userImgPath;
+let userLevelThreeImg = scorbunny.levelThreeImgPath;
+let userSkillImg = scorbunny.skillImgPath
 
 let userNameDisplay = document.getElementById('PH-area-user-name');
 let userHealthPrecent = userPHcurrent / userPHmax;
@@ -65,11 +69,12 @@ let userCatchBtnDisplay = document.getElementById('battle-area-user-character-bt
 let userAttriChangeDisplay = document.getElementById('user-attribute-change');
 let userRoundInfo = document.getElementById('user-round-info');
 let userTextInfo = document.getElementById('move-status-user');
+let userPokemonImg = document.getElementById('battle-area-user-pokemon-img');
 
 /* set com variable */
 let comName = kubfu.name;
 let comPHmax = kubfu.PHmax;
-let comPHcurrent = 100; //need cookie
+let comPHcurrent = comPHmax; //need cookie
 let comAttackMax = kubfu.attackMax; //need cookie
 let comAttackMin = kubfu.attackMin; //need cookie
 let comDefense = kubfu.defense; //need cookie
@@ -79,7 +84,7 @@ let comAttack;
 let comDamage;
 
 let comNameDisplay = document.getElementById('PH-area-com-name');
-let userPokemonImg = document.getElementById('battle-area-user-pokemon-img');
+
 let comHealthPrecent = comPHcurrent / comPHmax;
 let comHealthBarDisplay = document.getElementById('PH-area-com-health-bar-content');
 let comHealthPointDisplay = document.getElementById("PH-area-com-health-point-left");
@@ -88,6 +93,7 @@ let comPHDamageDisplay = document.getElementById('com-PH-Damage');
 let comAttriChangeDisplay = document.getElementById('com-attribute-change');
 let comRoundInfo = document.getElementById('com-round-info');
 let comTextInfo = document.getElementById('move-status-com');
+let comPokemonImg = document.getElementById('battle-area-com-pokemon-img');
 
 
 /*declare other variable */
@@ -171,10 +177,7 @@ function ComHealthDisplay() {
 
 /* timer display */
 function TimerStart() {
-    userMoveBtn.style.display = "none";
     document.getElementById("start-battle").style.display = "none";
-    userArea.style.transform = 'scale(1.2)';
-    userArea.style.left = "16vw";
     let userTimer = setInterval(UserTimer, userSpeed);
     let comTimer = setInterval(ComTimer, comSpeed);
     console.log(userTimerNum);
@@ -259,18 +262,26 @@ function StopRoundCheck() {
         comRoundInfo.style.display = 'none';
         comSpeed = kubfu.speed;
     } else if (userRestStopRound === 0) {
-        comRoundInfo.style.display = 'block';
-        comRoundInfo.innerHTML = 'Stop round left : ' + userRestStopRound;
+        setTimeout(() => {
+            comRoundInfo.style.display = 'block';
+            comRoundInfo.innerHTML = 'Stop round left : ' + userRestStopRound;
+            setTimeout(() => {
+                comRoundInfo.style.display = 'none';
+            }, 1500);
+        }, 500);
         userRestStopRound--;
         comSpeed = kubfu.speed;
-        setTimeout(() => {
-            comRoundInfo.style.display = 'none';
-        }, 2000);
     } else {
-        comRoundInfo.style.display = 'block';
-        comRoundInfo.innerHTML = 'Stop round left : ' + userRestStopRound;
+        setTimeout(() => {
+            comRoundInfo.style.display = 'block';
+            comRoundInfo.innerHTML = 'Stop round left : ' + userRestStopRound;
+            setTimeout(() => {
+                comRoundInfo.style.display = 'none';
+            }, 1500);
+        }, 500);
         userRestStopRound--;
     }
+
 }
 
 /* Buff Round Check */
@@ -289,8 +300,9 @@ function BuffRoundCheck() {
 function CatchCheck() {
 
     if (comPHcurrent / comPHmax < 0.2) {
-        userCatchBtnDisplay.style.display = "block";
-        console.log(userCatchBtnDisplay);
+        setTimeout(() => {
+            userCatchBtnDisplay.style.display = "block";
+        }, 3000);
     }
 }
 
@@ -314,8 +326,22 @@ function WinnerCheck() {
         document.getElementById("winner image").src = comImgPath;
     }
 }
+
+/* move action */
+function moveAction() {
+    userMoveBtn.style.display = "none";
+    userArea.style.transform = 'scale(1.2)';
+    userArea.style.left = "16vw";
+}
 /* status functions end*/
 
+
+/* move animation */
+function UserAttack() {
+    setTimeout(() => {
+        userPokemonImg.style.animation = "UserNormalAttack 1.5s linear";
+    }, 500);
+}
 
 
 
@@ -324,29 +350,30 @@ function WinnerCheck() {
 
 /* move function */
 function UserAttack() { // user noraml attack
-    console.log(userAttackMax);
-    console.log(userAttackMin);
-    console.log(userRestBuffRound);
     StopRoundCheck();
     BuffRoundCheck();
-    console.log(userAttackMax);
-    console.log(userAttackMin);
+    moveAction();
+    UserSpiritGatheringBar();
     userAttack = Math.floor(Math.random() * (userAttackMax - userAttackMin)) + userAttackMin;
     comDamage = userAttack - comDefense;
     comPHcurrent = comPHcurrent - comDamage;
-
-    comPHDamageDisplay.style.display = "block";
-    comTextInfo.style.animation = "TextDisplay 0.6s linear";
     comPHDamageDisplay.innerHTML = "- PH " + comDamage;
     setTimeout(() => {
-        comPHDamageDisplay.style.display = "none";
+        userPokemonImg.style.animation = "UserNormalAttack 1.3s linear";
+        setTimeout(() => {
+            comPokemonImg.style.animation = "Shake 0.2s linear";
+            comPHDamageDisplay.style.display = "block";
+            comTextInfo.style.animation = "TextDisplay 1s linear";
+            ComHealthDisplay();
+            setTimeout(() => {
+                userPokemonImg.style.animation = "wave 0.8s linear infinite";
+                comPokemonImg.style.animation = "wave 1.2s linear infinite";
+                comPHDamageDisplay.style.display = "none";
+                WinnerCheck();
+                setTimeout(TimerStart, 500);
+            }, 900);
+        }, 1100);
     }, 500);
-
-    ComHealthDisplay();
-    UserSpiritGatheringBar();
-    WinnerCheck();
-    setTimeout(TimerStart, 2000);
-
 }
 
 function ComAttack() { // com normal  attack
@@ -354,21 +381,34 @@ function ComAttack() { // com normal  attack
     userDamage = comAttack - userDefense;
     userPHcurrent = userPHcurrent - userDamage;
 
-    userPHDamageDisplay.style.display = "block";
-    userTextInfo.style.animation = "TextDisplay 0.6s linear";
+    // userPHDamageDisplay.style.display = "block";
+    // userTextInfo.style.animation = "TextDisplay 0.6s linear";
     userPHDamageDisplay.innerHTML = "- PH " + userDamage;
-    setTimeout(() => {
-        userPHDamageDisplay.style.display = "none";
-    }, 500);
 
-    UserHealthDisplay();
-    WinnerCheck();
-    setTimeout(TimerStart, 2000);
+    setTimeout(() => {
+        comPokemonImg.style.animation = "ComNormalAttack 1.3s linear";
+        setTimeout(() => {
+            userPokemonImg.style.animation = "Shake 0.2s linear";
+            userPHDamageDisplay.style.display = "block";
+            userTextInfo.style.animation = "TextDisplay 1s linear";
+            UserHealthDisplay();
+            setTimeout(() => {
+                console.log(userPokemonImg);
+                userPokemonImg.style.animation = "wave 0.8s linear infinite";
+                comPokemonImg.style.animation = "wave 1.2s linear infinite";
+                userPHDamageDisplay.style.display = "none";
+                console.log(userPokemonImg);
+                WinnerCheck();
+                setTimeout(TimerStart, 500);
+            }, 900);
+        }, 1100);
+    }, 500);
 }
 /* user skill attack */
 function UserSkillAttack() {
     StopRoundCheck();
     BuffRoundCheck();
+    moveAction();
     userAttack = Math.floor(Math.random() * (userAttackMax - userAttackMin)) + userAttackMin;
     console.log(userSkillName);
     if (userSkillName === "double kick") {
@@ -382,23 +422,58 @@ function UserSkillAttack() {
     }
     comDamage = userSkillAttack - comDefense;
     comPHcurrent = comPHcurrent - comDamage;
-    comPHDamageDisplay.style.display = "block";
-    comTextInfo.style.animation = "TextDisplay 0.6s linear";
     comPHDamageDisplay.innerHTML = "- PH " + comDamage;
-    setTimeout(() => {
-        comPHDamageDisplay.style.display = "none";
-    }, 500);
-
-    userSpiritPoint = 0;
-    console.log(comDamage);
-    ComHealthDisplay();
     UserSpiritCheck();
-    WinnerCheck();
-    setTimeout(TimerStart, 2000);
+    setTimeout(() => {
+        Evo();
+        userPokemonImg.style.animation = "evolution 1s linear";
+        userPokemonImg.src = userLevelThreeImg;
+        setTimeout(() => {
+            userPokemonImg.src = userSkillImg;
+            userPokemonImg.style.animation = "ScorbunnySkill 1.5s linear";
+            setTimeout(() => {
+                comPokemonImg.style.animation = "Shake 0.2s linear";
+                comPHDamageDisplay.style.display = "block";
+                comTextInfo.style.animation = "TextDisplay 1s linear";
+                ComHealthDisplay();
+                setTimeout(() => {
+                    userPokemonImg.src = userLevelOneImg;
+                    userPokemonImg.style.animation = "wave 0.8s linear infinite";
+                    comPokemonImg.style.animation = "wave 1.2s linear infinite";
+                    comPHDamageDisplay.style.display = "none";
+                    WinnerCheck();
+                    setTimeout(TimerStart, 500);
+                }, 1300);
+            }, 900);
+        }, 1000);
+    }, 500);
+}
+
+
+
+function Evo() {
+    let i = 0;
+    let j = true;
+    let evochange = setInterval(() => {
+        i++;
+        if (i === 10) {
+            clearInterval(evochange);
+        } else {
+            console.log(j)
+            if (j === true) {
+                j = false;
+                userPokemonImg.src = userLevelThreeImg;
+            } else if (j === false) {
+                j = true;
+                userPokemonImg.src = userLevelOneImg;
+            }
+        }
+    }, 100);
 }
 
 /*user stop com move */
 function UserStopAttack() {
+    moveAction();
     comSpeed = 100000000;
     userRestStopRound = userSkipNum;
     console.log(comSpeed);
@@ -410,6 +485,7 @@ function UserStopAttack() {
 
 /* buff attack */
 function UserBuffAttack() {
+
     if (userRestBuffRound >= 0) {
         comAttriChangeDisplay.style.display = "block";
         comAttriChangeDisplay.innerHTML = "You can not repeat the Buff";
@@ -417,37 +493,36 @@ function UserBuffAttack() {
             comAttriChangeDisplay.style.display = "none";
         }, 1000);
     } else {
+        moveAction();
+        UserSpiritCheck();
         userAttackMax = userAttackMax + userBuff;
         userAttackMin = userAttackMin + userBuff;
         comDefense = comDefense - userDebuff;
+        userRestBuffRound = 3;
         if (comDefense <= 0) {
             comDefense = 0;
         }
-
-        comAttriChangeDisplay.style.display = "block";
-        comTextInfo.style.animation = "TextDisplay 0.6s linear";
-        comAttriChangeDisplay.innerHTML = "- Defense" + userDebuff;
         setTimeout(() => {
-            comAttriChangeDisplay.style.display = "none";
+            comAttriChangeDisplay.style.display = "block";
+            comTextInfo.style.animation = "TextDisplay 0.6s linear";
+            comAttriChangeDisplay.innerHTML = "- Defense" + userDebuff;
+            userAttriChangeDisplay.style.display = "block";
+            userTextInfo.style.animation = "TextDisplay 0.6s linear";
+            userAttriChangeDisplay.innerHTML = "+ Attack" + userBuff
+            ComHealthDisplay();
+            setTimeout(() => {
+                comAttriChangeDisplay.style.display = "none";
+                userAttriChangeDisplay.style.display = "none";
+                setTimeout(TimerStart, 500);
+            }, 500);
         }, 500);
-
-        userAttriChangeDisplay.style.display = "block";
-        userTextInfo.style.animation = "TextDisplay 0.6s linear";
-        userAttriChangeDisplay.innerHTML = "+ Attack" + userBuff;
-        setTimeout(() => {
-            userAttriChangeDisplay.style.display = "none";
-        }, 500);
-
-        userRestBuffRound = 3;
-        ComHealthDisplay();
-        UserSpiritCheck();
-        setTimeout(TimerStart, 2000);
     }
 }
 /*healing */
 function UserHealing() {
     StopRoundCheck();
     BuffRoundCheck();
+    moveAction();
     userPHcurrent = userPHcurrent + medicine;
     if (userPHcurrent >= userPHmax) {
         userPHcurrent = userPHmax;
@@ -465,14 +540,16 @@ function UserHealing() {
 
 /* Catch Pokemon */
 function CatchPokemon() {
+    moveAction();
     document.getElementById('battle').remove()
     document.getElementById('timer').remove();
     var result = document.createElement("section");
     document.body.append(result);
     result.innerHTML = '<img id = "winner image" src="">';
     document.getElementById("winner image").src = "../images/pokeBall.png";
+    document.getElementById("winner image").style.animation = "PokemonBallShake 3s linear";
     setTimeout(() => {
-        result.innerHTML = '<p>You caught<span id="winner"></span></p><img id = "winner image" src="">';
+        result.innerHTML = '<p>You got <span id="winner"></span></p><img id = "winner image" src="">';
         document.getElementById('winner').innerText = comName;
         document.getElementById("winner image").src = comImgPath;
     }, 3000);

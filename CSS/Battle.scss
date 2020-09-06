@@ -194,6 +194,7 @@ body {
                 bottom: 0;
                 left: 0;
                 width: 20vw;
+                animation: wave 0.8s linear infinite;
             }
             div {
                 position: absolute;
@@ -326,14 +327,15 @@ body {
             img {
                 position: absolute;
                 bottom: 10vh;
-                right: 0;
+                right: 5vw;
                 width: 18vw;
+                animation: wave 1.2s linear infinite;
             }
             div {
                 position: absolute;
                 // background-color: red;
                 width: 30vw;
-                right: 18vw;
+                right: 25vw;
                 bottom: 15vH;
                 p {
                     text-align: right;
