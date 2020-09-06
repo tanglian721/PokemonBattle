@@ -342,8 +342,8 @@
             transform: scale(1.2) translate(0, 0);
   }
   70% {
-    -webkit-transform: scale(0.8) translate(20%, 100%);
-            transform: scale(0.8) translate(20%, 100%);
+    -webkit-transform: scale(0.8) translate(20%, 200%);
+            transform: scale(0.8) translate(20%, 200%);
   }
   40% {
     -webkit-transform: scale(1) translate(0, 0);
@@ -361,8 +361,8 @@
             transform: scale(1.2) translate(0, 0);
   }
   70% {
-    -webkit-transform: scale(0.8) translate(20%, 100%);
-            transform: scale(0.8) translate(20%, 100%);
+    -webkit-transform: scale(0.8) translate(20%, 200%);
+            transform: scale(0.8) translate(20%, 200%);
   }
   40% {
     -webkit-transform: scale(1) translate(0, 0);
@@ -562,6 +562,13 @@ body {
   width: 100%;
   height: 94%;
   position: relative;
+}
+
+audio {
+  z-index: 100;
+  opacity: 0.7;
+  position: absolute;
+  display: none;
 }
 
 #PH-area {
@@ -863,6 +870,74 @@ body {
   border-radius: 1.5vh;
   -webkit-transition: all 0.5s linear;
   transition: all 0.5s linear;
+}
+
+#battle #battle-area-user-btn {
+  width: 30vw;
+  height: 20vh;
+  position: absolute;
+  right: 2vw;
+  bottom: 0;
+}
+
+#battle #battle-area-user-btn #attack {
+  background-color: red;
+}
+
+#battle #battle-area-user-btn #buff {
+  background-color: blue;
+}
+
+#battle #battle-area-user-btn #stop {
+  background-color: purple;
+}
+
+#battle #battle-area-user-btn #healing {
+  background-color: green;
+}
+
+#battle #battle-area-user-btn button {
+  width: 30vw;
+  height: 4vh;
+  color: white;
+  border-radius: 2vh;
+  display: block;
+  margin-bottom: 1vh;
+}
+
+#battle #battle-area-user-btn #skill-btn {
+  z-index: 99;
+  width: 20vw;
+  height: 5vh;
+  position: absolute;
+  border-radius: 2.5vh;
+  left: -26vw;
+  top: 10vh;
+  color: white;
+  font-family: 'Signika', sans-serif;
+  font-size: 0.8rem;
+  text-shadow: 0 0 5px #000000;
+  background: -webkit-gradient(linear, left top, right top, color-stop(-43.33%, #00FF29), color-stop(42.31%, #EBFF00), color-stop(121.11%, rgba(255, 0, 0, 0.79)));
+  background: linear-gradient(90deg, #00FF29 -43.33%, #EBFF00 42.31%, rgba(255, 0, 0, 0.79) 121.11%);
+  -webkit-animation: BtnTwinkle 0.3s linear infinite;
+          animation: BtnTwinkle 0.3s linear infinite;
+  display: none;
+}
+
+#battle #battle-area-user-btn #battle-area-user-character-btn {
+  z-index: 99;
+  width: 10vw;
+  height: 10vw;
+  background-image: url(../images/pokeBall.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  position: absolute;
+  left: -20vw;
+  bottom: 12vh;
+  -webkit-animation: BtnScale 0.3s linear infinite;
+          animation: BtnScale 0.3s linear infinite;
+  display: none;
 }
 
 #battle-area-com {

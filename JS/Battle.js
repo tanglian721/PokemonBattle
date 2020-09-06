@@ -105,9 +105,18 @@ let userMoveBtn = document.getElementById('battle-area-user-btn');
 let userArea = document.getElementById('battle-area-user');
 let timerDisplay = document.getElementById('timer');
 let medicine = 50;
+let j = true;
 
-
-
+function Audio() {
+    console.log(document.getElementById('audio'));
+    if (j === true) {
+        document.getElementById('audio').style.display = "block";
+        j = false;
+    } else if (j === false) {
+        document.getElementById('audio').style.display = "none";
+        j = true;
+    }
+}
 /*set background status */
 document.body.style.backgroundImage = "URL('../images/battle1Backgroud.jpg')"; //How to use a variable in right quote?
 userPokemonImg.src = userImgPath;
@@ -257,21 +266,24 @@ function UserSpiritCheck() {
 }
 /* Stop round check */
 function StopRoundCheck() {
-    if (userRestStopRound < 0) {
+    console.log(userRestStopRound);
+    if (userRestStopRound <= 0) {
         userRestStopRound = -1;
         comRoundInfo.style.display = 'none';
         comSpeed = kubfu.speed;
-    } else if (userRestStopRound === 0) {
-        setTimeout(() => {
-            comRoundInfo.style.display = 'block';
-            comRoundInfo.innerHTML = 'Stop round left : ' + userRestStopRound;
-            setTimeout(() => {
-                comRoundInfo.style.display = 'none';
-            }, 1500);
-        }, 500);
-        userRestStopRound--;
-        comSpeed = kubfu.speed;
+        // } else if (userRestStopRound === 0) {
+        //     console.log(userRestStopRound);
+        //     setTimeout(() => {
+        //         comRoundInfo.style.display = 'block';
+        //         comRoundInfo.innerHTML = 'Stop round left : ' + userRestStopRound;
+        //         setTimeout(() => {
+        //             comRoundInfo.style.display = 'none';
+        //         }, 1500);
+        //         userRestStopRound--;
+        //     }, 500);
+        //     comSpeed = kubfu.speed;
     } else {
+        console.log(userRestStopRound);
         setTimeout(() => {
             comRoundInfo.style.display = 'block';
             comRoundInfo.innerHTML = 'Stop round left : ' + userRestStopRound;
@@ -504,17 +516,17 @@ function UserBuffAttack() {
         }
         setTimeout(() => {
             comAttriChangeDisplay.style.display = "block";
-            comTextInfo.style.animation = "TextDisplay 0.6s linear";
+            comTextInfo.style.animation = "TextDisplay 1s linear";
             comAttriChangeDisplay.innerHTML = "- Defense" + userDebuff;
             userAttriChangeDisplay.style.display = "block";
-            userTextInfo.style.animation = "TextDisplay 0.6s linear";
+            userTextInfo.style.animation = "TextDisplay 1s linear";
             userAttriChangeDisplay.innerHTML = "+ Attack" + userBuff
             ComHealthDisplay();
             setTimeout(() => {
                 comAttriChangeDisplay.style.display = "none";
                 userAttriChangeDisplay.style.display = "none";
                 setTimeout(TimerStart, 500);
-            }, 500);
+            }, 900);
         }, 500);
     }
 }
@@ -555,3 +567,22 @@ function CatchPokemon() {
     }, 3000);
 
 }
+
+
+/*the keyboard of control */
+
+Body.addEventListener('keypress', function(letter) {
+    if (letter.key.toLowerCase() === "a") {
+        UserAttack();
+    } else if (letter.key.toLowerCase() === "b") {
+        UserBuffAttack();
+    } else if (letter.key.toLowerCase() === "s") {
+        UserStopAttack();
+    } else if (letter.key.toLowerCase() === "h") {
+        UserHealing();
+    } else if (letter.key.toLowerCase() === "t") {
+        UserSkillAttack();
+    } else if (letter.key.toLowerCase() === "c") {
+        CatchPokemon();
+    }
+})

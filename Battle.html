@@ -9,10 +9,12 @@
     <title>Document</title>
 </head>
 
-<body>
+<body id="Body">
+    <audio id="audio" controls autoplay>
+        <source src="https://vgmdownloads.com/soundtracks/pokemon-sword-shield-ost/lwuhtfzmom/1-01%20Battle%21%20%28Wild%20Pok%C3%A9mon%29.mp3" type="audio/ogg"></audio>
     <div id="background">
         <!-- health point display-->
-        <div id="PH-area">
+        <div id="PH-area" onclick="Audio()">
             <div id="PH-area-user" class="PH-area-health">
                 <p id="PH-area-user-name" class="PH-area-health-name">USER</p>
                 <div id="PH-area-user-health-bar" class="PH-area-health-bar">
@@ -60,14 +62,7 @@
                         <p class="move-status-text" id="user-round-info">PH:-25</p>
                     </div>
                 </div>
-                <div id="battle-area-user-btn" class="battle-area-btn">
-                    <div id="battle-area-user-character-btn" class="battle-area-character-btn" onclick="CatchPokemon()"></div>
-                    <button id="attack" onclick="UserAttack()">ATTACK / A</button>
-                    <button id="buff" onclick="UserBuffAttack()">BUFF / B</button>
-                    <button id="stop" onclick="UserStopAttack()">STOP / S</button>
-                    <button id="healing" onclick="UserHealing()">MEDICINE / M</button>
-                    <button id="skill-btn" onclick="UserSkillAttack()">skill-btn</button>
-                </div>
+
                 <div id="battle-area-user-skill" class="battle-area-skill">
                     <div id="spirit-bar-max">
                         <div id="spirit-bar-max-current"></div>
@@ -75,6 +70,14 @@
 
                 </div>
                 <div id="battle-area-user-status" class="battle-area-status"></div>
+            </div>
+            <div id="battle-area-user-btn" class="battle-area-btn">
+                <div id="battle-area-user-character-btn" class="battle-area-character-btn" onclick="CatchPokemon()"></div>
+                <button id="attack" onclick="UserAttack()">ATTACK / A</button>
+                <button id="buff" onclick="UserBuffAttack()">BUFF / B</button>
+                <button id="stop" onclick="UserStopAttack()">STOP / S</button>
+                <button id="healing" onclick="UserHealing()">MEDICINE / M</button>
+                <button id="skill-btn" onclick="UserSkillAttack()">skill-btn</button>
             </div>
             <div id="battle-area-com" class="battle-area">
                 <div id="battle-area-com-character" class="battle-area-character">
@@ -93,6 +96,7 @@
                 <div id="battle-area-com-status" class="battle-area-status"></div>
                 <div id="battle-area-com-skill" class="battle-area-skill"></div>
             </div>
+
         </div>
     </div>
 
