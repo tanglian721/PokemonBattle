@@ -1,0 +1,61 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    background-image: url(../images/selectionBackground.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+#background {
+    height: 94vh;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    grid-template-rows: 2fr 5fr 4fr 1fr;
+    h1 {
+        font-size: 1.5rem;
+        text-align: center;
+        color: white;
+        text-shadow: 1px 1px 0 black;
+    }
+    #characterSelect {
+        height: 100%;
+        overflow: hidden;
+        img {
+            height: 100%;
+            filter: brightness(50%);
+            &:hover {
+                filter: brightness(100%);
+            }
+        }
+    }
+    #pokemonSelect {
+        height: 100%;
+        overflow: hidden;
+        display: grid;
+        align-items: center;
+        justify-items: center;
+        grid-template-columns: 1fr 1fr 1fr;
+        column-gap: 5vw;
+        img {
+            width: 25vw;
+            filter: brightness(50%);
+            &:hover {
+                filter: brightness(100%);
+            }
+        }
+    }
+    #startBattle {
+        color: white;
+        text-shadow: 1px 1px 1px gray;
+        padding: 3vw;
+        border: 1px solid white;
+        border-radius: 3vw;
+    }
+}
