@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Signika:wght@600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
     <link rel="stylesheet" href="./CSS/Battle.css">
     <title>Document</title>
 </head>
@@ -48,6 +49,8 @@
         </div>
 
         <button id="start-battle" onclick="TimerStart()">start battle</button>
+        <button id="return" onclick="Return()">Return</button>
+        <button id="clear" onclick="Clear2()">Reset</button>
         <div id="battle">
             <div id="battle-area-user" class="battle-area">
                 <div id="battle-area-user-character" class="battle-area-character">

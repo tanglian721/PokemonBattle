@@ -97,11 +97,27 @@ audio {
     left: 35vw;
     width: 30vw;
     height: 8vh;
+    color: white;
     border-radius: 4vh;
     font-size: 1.2rem;
     text-transform: uppercase;
-    background: linear-gradient(86.51deg, #FFFFFF -14.92%, rgba(255, 0, 0, 0.79) 92.91%);
+    box-shadow: 1px 1px 0 rgb(0, 26, 255);
+    background: linear-gradient(90deg, #FFFFFF -43.33%, #F4FF71 -43.32%, rgba(255, 92, 0, 0.79) 121.11%);
+}
+
+#return,
+#clear {
+    width: 10vw;
+    height: 10vw;
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
     color: white;
+    font-size: 0.5rem;
+    text-shadow: 1px 1px 1px gray;
+    border: 1px solid rgb(255, 230, 0);
+    border-radius: 5vw;
+    box-shadow: 1px 1px 0 rgb(0, 26, 255);
+    background: linear-gradient(90deg, #FFFFFF -43.33%, #F4FF71 -43.32%, rgba(255, 92, 0, 0.79) 121.11%);
 }
 
 #timer {
@@ -171,7 +187,7 @@ audio {
             height: 50vh;
             bottom: 5vh;
             img {
-                width: 30vw;
+                height: 35vh;
                 position: absolute;
                 bottom: 0;
             }

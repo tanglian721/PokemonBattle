@@ -4,23 +4,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
     <link rel="stylesheet" href="./CSS/styls.css">
     <title>Document</title>
 </head>
 
 <body id="Body">
     <div id="background">
-        <h1>Select Your Character and Pokemon</h1>
+        <h1>Select Your <br> Character & Pokemon</h1>
         <div id="characterSelect">
-            <img src="./images/characterM.png" alt="" id="male">
-            <img src="./images/characterF.png" alt="" id="female">
+            <img src="./images/characterM.png" alt="" id="Victor" value="Victor" onclick="CharacterSelect('Victor')">
+            <img src="./images/characterF.png" alt="" id="Gloria" value="Gloria" onclick="CharacterSelect('Gloria')">
         </div>
         <div id="pokemonSelect">
-            <img src="./images/scorbunny-level1.png" alt="" id="scorbuuny">
-            <img src="./images/grookey-level1.png" alt="" id="grookey">
-            <img src="./images/sobble-level1.png" alt="" id="sobble">
+            <img src="./images/scorbunny-level1.png" alt="" id="scorbunny" value="scorbunny" onclick="PokemonSelect('scorbunny')">
+            <img src="./images/grookey-level1.png" alt="" id="grookey" value="grookey" onclick="PokemonSelect('grookey')">
+            <img src="./images/sobble-level1.png" alt="" id="sobble" value="sobble" onclick="PokemonSelect('sobble')">
         </div>
-        <div id="startBattle">Start Battle</div>
+        <div id="startBattle" onclick="StartBattle()">Start Battle</div>
+        <div id="clear" onclick="Clear()">Clear Selection</div>
 
 
     </div>

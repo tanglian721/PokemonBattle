@@ -1,3 +1,15 @@
+let victor = {
+    ImgPath: '../images/characterM.png',
+    buff: 10,
+    speed: 0,
+}
+let gloria = {
+    ImgPath: '../images/characterF.png',
+    buff: 0,
+    speed: 10,
+}
+
+
 let scorbunny = {
     name: 'scorbunny',
     PHmax: 220,
@@ -16,6 +28,44 @@ let scorbunny = {
     skillImgPath: '../images/scorbunny-final.png',
     backGroundPath: '../images/battle1Backgroud.jpg'
 }
+
+let grookey = {
+    name: 'grookey',
+    PHmax: 240,
+    attackMax: 90,
+    attackMin: 35,
+    defense: 24,
+    speed: 60,
+    skipNum: 2,
+    buff: 20,
+    debuff: 12,
+    skillName: 'Knock Off',
+    skillAttack: "userAttack + 50",
+    levelOneImgPath: '../images/grookey-level1.png',
+    levelTwoImgPath: '../images/grookey-level2.png',
+    levelThreeImgPath: '../images/grookey-level3.png',
+    skillImgPath: '../images/grookey-final.png',
+    backGroundPath: '../images/battle2Backgroud.jpg'
+}
+
+let sobble = {
+    name: 'sobble',
+    PHmax: 250,
+    attackMax: 85,
+    attackMin: 35,
+    defense: 30,
+    speed: 70,
+    skipNum: 3,
+    buff: 10,
+    debuff: 15,
+    skillName: 'Water Gun',
+    skillAttack: 'userAttack + comDefense',
+    levelOneImgPath: '../images/sobble-level1.png',
+    levelTwoImgPath: '../images/sobble-level2.png',
+    levelThreeImgPath: '../images/sobble-level3.png',
+    skillImgPath: '../images/sobble-final.png',
+    backGroundPath: '../images/battle3Backgroud.jpg'
+}
 let kubfu = {
     name: 'kubfu',
     PHmax: 250,
@@ -32,30 +82,63 @@ let kubfu = {
     // levelThreeImgPath: '../images/scorbunny-level3.png',
 }
 
+let userCharacter = Cookies.get('UserCharacterCookie');
+let userPokemon = Cookies.get('UserPokemonCookie');
+if (userCharacter === "Victor") {
+    userCharacter = victor;
+} else if (userCharacter === "Gloria") {
+    userCharacter = gloria;
+} else if (userCharacter === undefined) {
+    document.getElementById('battle').remove()
+    document.getElementById('timer').remove();
+    let result = document.createElement("section");
+    result.innerHTML = '<p>You Have not Choose Character!</p>';
+    document.body.append(result);
+}
+console.log(userCharacter);
+
+
+if (userPokemon === "grookey") {
+    userPokemon = grookey;
+} else if (userPokemon === "sobble") {
+    userPokemon = sobble;
+} else if (userPokemon === "scorbunny") {
+    userPokemon = scorbunny;
+} else if (userPokemon === undefined) {
+    document.getElementById('battle').remove()
+    document.getElementById('timer').remove();
+    var result = document.createElement("section");
+    result.innerHTML = '<p>You Have not Choose Pokemon!</p>';
+    document.body.append(result);
+}
+console.log(userPokemon);
+console.log(userPokemon.PHmax);
 
 /* set user variable */
-let userName = scorbunny.name;
-let userPHmax = scorbunny.PHmax;
+let characterImgPath = userCharacter.ImgPath;
+let characterBuff = userCharacter.buff;
+let characterSpeed = userCharacter.speed;
+let userName = userPokemon.name;
+let userPHmax = userPokemon.PHmax;
 let userPHcurrent = userPHmax; //need cookie
-let userAttackMax = scorbunny.attackMax; //need cookie
-let userAttackMin = scorbunny.attackMin; //need cookie
-let userDefense = scorbunny.defense; //need cookie
-let userSpeed = scorbunny.speed; //need cookie
-let userSkipNum = scorbunny.skipNum; //need cookie
-let userBuff = scorbunny.buff;
-let userDebuff = scorbunny.debuff;
-let userSkillName = scorbunny.skillName;
-let userImgPath = scorbunny.levelOneImgPath; //need cookie
-let userBackGroundPath = scorbunny.backGroundPath;
-let userSkillAttack;
-let userAttack;
+let userAttackMax = userPokemon.attackMax + characterBuff; //need cookie
+let userAttackMin = userPokemon.attackMin + characterBuff; //need cookie
+let userDefense = userPokemon.defense; //need cookie
+let userSpeed = userPokemon.speed - characterSpeed; //need cookie
+let userSkipNum = userPokemon.skipNum;
+let userBuff = userPokemon.buff;
+let userDebuff = userPokemon.debuff;
+let userSkillName = userPokemon.skillName;
+let userImgPath = userPokemon.levelOneImgPath; //need cookie
+let userBackGroundPath = userPokemon.backGroundPath;
+
 let userDamage;
 let userSpiritPoint = 0; //need cookie
-let userRestStopRound = -1;
-let userRestBuffRound = -1;
+let userRestStopRound = -1; //need cookie
+let userRestBuffRound = -1; //need cookie
 let userLevelOneImg = userImgPath;
-let userLevelThreeImg = scorbunny.levelThreeImgPath;
-let userSkillImg = scorbunny.skillImgPath
+let userLevelThreeImg = userPokemon.levelThreeImgPath;
+let userSkillImg = userPokemon.skillImgPath
 
 let userNameDisplay = document.getElementById('PH-area-user-name');
 let userHealthPrecent = userPHcurrent / userPHmax;
@@ -117,10 +200,34 @@ function Audio() {
         j = true;
     }
 }
+
+
+/* reading cookies */
+console.log(Cookies.get('userPHcurrent'));
+if (Cookies.get('userPHcurrent') !== undefined) {
+    userPHcurrent = parseInt(Cookies.get('userPHcurrent'));
+    userAttackMax = parseInt(Cookies.get('userAttackMax'));
+    userAttackMin = parseInt(Cookies.get('userAttackMin'));
+    userDefense = parseInt(Cookies.get('userDefense'));
+    userSpeed = parseInt(Cookies.get('userSpeed'));
+    userSpiritPoint = parseInt(Cookies.get('userSpiritPoint'));
+    userRestStopRound = parseInt(Cookies.get('userRestStopRound'));
+    userRestBuffRound = parseInt(Cookies.get('userRestBuffRound'));
+    comPHcurrent = parseInt(Cookies.get('comPHcurrent'));
+    comAttackMax = parseInt(Cookies.get('comAttackMax'));
+    comAttackMin = parseInt(Cookies.get('comAttackMin'));
+    comDefense = parseInt(Cookies.get('comDefense'));
+    comSpeed = parseInt(Cookies.get('comSpeed'));
+    userTimerNum = parseInt(Cookies.get('userTimerNum'));
+    comTimerNum = parseInt(Cookies.get('comTimerNum'));
+}
+console.log(userTimerNum);
+
 /*set background status */
 document.body.style.backgroundImage = "URL('../images/battle1Backgroud.jpg')"; //How to use a variable in right quote?
 userPokemonImg.src = userImgPath;
-
+document.getElementById('battle-area-user-character-img').src = characterImgPath; //character image
+document.getElementById('timer-user-bar-current-img').src = userImgPath;
 userNameDisplay.innerHTML = userName.toUpperCase(); //user name display
 UserHealthDisplay(); //initial user health display
 
@@ -129,12 +236,35 @@ ComHealthDisplay(); //initial com health display
 userMoveBtn.style.display = "none"; // do not display the move button 
 // userSkillBtnName.style.display = "none"; // do not display the skill button
 UserSpiritCheck(); //initial user spirit display
+userSpiritBar.style.height = userTimerNum + "vh";
+comSpiritBar.style.height = comTimerNum + "vh";
 userPHDamageDisplay.style.display = "none";
 userAttriChangeDisplay.style.display = "none";
 userRoundInfo.style.display = "none";
 comPHDamageDisplay.style.display = "none";
 comAttriChangeDisplay.style.display = "none";
 comRoundInfo.style.display = "none";
+
+/*Clear Cookies */
+function Clear2() {
+    Cookies.remove('UserCharacterCookie');
+    Cookies.remove('UserPokemonCookie');
+    Cookies.remove('userPHcurrent');
+    Cookies.remove('userAttackMax');
+    Cookies.remove('userAttackMin');
+    Cookies.remove('userDefense');
+    Cookies.remove('userSpeed');
+    Cookies.remove('userSpiritPoint');
+    Cookies.remove('userRestStopRound');
+    Cookies.remove('userRestBuffRound');
+    Cookies.remove('comPHcurrent');
+    Cookies.remove('comAttackMax');
+    Cookies.remove('comAttackMin');
+    Cookies.remove('comDefense');
+    Cookies.remove('comSpeed');
+    Cookies.remove('userTimerNum');
+    Cookies.remove('comTimerNum');
+}
 
 
 /* status functions start*/
@@ -193,6 +323,7 @@ function TimerStart() {
 
     function UserTimer() {
         userTimerNum++;
+        Cookies.set('userTimerNum', userTimerNum);
         if (userTimerNum > 60) {
             userTimerNum = 0;
             userArea.style.transform = 'scale(1)';
@@ -212,6 +343,7 @@ function TimerStart() {
 
     function ComTimer() {
         comTimerNum++;
+        Cookies.set('comTimerNum', comTimerNum);
         if (comTimerNum > 60) {
             comTimerNum = 0;
             ComAttack();
@@ -223,10 +355,30 @@ function TimerStart() {
             comSpiritBar.style.height = comTimerNum + "vh";
             // console.log(comTimerNum);
         }
+
     }
 
 
 }
+
+function CookiesSave() {
+    Cookies.set('userPHcurrent', userPHcurrent)
+    Cookies.set('userAttackMax', userAttackMax)
+    Cookies.set('userAttackMin', userAttackMin)
+    Cookies.set('userDefense', userDefense)
+    Cookies.set('userSpeed', userSpeed)
+    Cookies.set('userSpiritPoint', userSpiritPoint)
+    Cookies.set('userRestStopRound', userRestStopRound)
+    Cookies.set('userRestBuffRound', userRestBuffRound)
+    Cookies.set('comPHcurrent', comPHcurrent)
+    Cookies.set('comAttackMax', comAttackMax)
+    Cookies.set('comAttackMin', comAttackMin)
+    Cookies.set('comDefense', comDefense)
+    Cookies.set('comSpeed', comSpeed)
+        // Cookies.set('userTimerNum', userTimerNum)
+        // Cookies.set('comTimerNum', comTimerNum)
+}
+
 
 /*spirit gathering */
 function UserSpiritGatheringBar() {
@@ -295,6 +447,7 @@ function StopRoundCheck() {
     }
 
 }
+
 
 /* Buff Round Check */
 function BuffRoundCheck() {
@@ -382,10 +535,12 @@ function UserAttack() { // user noraml attack
                 comPokemonImg.style.animation = "wave 1.2s linear infinite";
                 comPHDamageDisplay.style.display = "none";
                 WinnerCheck();
+                CookiesSave();
                 setTimeout(TimerStart, 500);
             }, 900);
         }, 1100);
     }, 500);
+
 }
 
 function ComAttack() { // com normal  attack
@@ -411,6 +566,7 @@ function ComAttack() { // com normal  attack
                 userPHDamageDisplay.style.display = "none";
                 console.log(userPokemonImg);
                 WinnerCheck();
+                CookiesSave();
                 setTimeout(TimerStart, 500);
             }, 900);
         }, 1100);
@@ -454,6 +610,7 @@ function UserSkillAttack() {
                     comPokemonImg.style.animation = "wave 1.2s linear infinite";
                     comPHDamageDisplay.style.display = "none";
                     WinnerCheck();
+                    CookiesSave();
                     setTimeout(TimerStart, 500);
                 }, 1300);
             }, 900);
@@ -492,6 +649,7 @@ function UserStopAttack() {
     StopRoundCheck();
     ComHealthDisplay();
     UserSpiritCheck();
+    CookiesSave();
     setTimeout(TimerStart, 2000);
 }
 
@@ -525,6 +683,7 @@ function UserBuffAttack() {
             setTimeout(() => {
                 comAttriChangeDisplay.style.display = "none";
                 userAttriChangeDisplay.style.display = "none";
+                CookiesSave();
                 setTimeout(TimerStart, 500);
             }, 900);
         }, 500);
@@ -539,15 +698,18 @@ function UserHealing() {
     if (userPHcurrent >= userPHmax) {
         userPHcurrent = userPHmax;
     }
-    userTextInfo.style.animation = "TextDisplay 0.6s linear";
-    userPHDamageDisplay.style.display = "block";
-    userPHDamageDisplay.innerHTML = "+ PH" + medicine;
     setTimeout(() => {
-        userPHDamageDisplay.style.display = "none";
+        userPHDamageDisplay.style.display = "block";
+        userTextInfo.style.animation = "TextDisplay 1s linear";
+        userPHDamageDisplay.innerHTML = "+ PH" + medicine;
+        setTimeout(() => {
+            userPHDamageDisplay.style.display = "none";
+        }, 900);
+        UserHealthDisplay();
+        UserSpiritCheck();
+        CookiesSave();
+        setTimeout(TimerStart, 500);
     }, 500);
-    UserHealthDisplay();
-    UserSpiritCheck();
-    setTimeout(TimerStart, 2000);
 }
 
 /* Catch Pokemon */
@@ -565,6 +727,7 @@ function CatchPokemon() {
         document.getElementById('winner').innerText = comName;
         document.getElementById("winner image").src = comImgPath;
     }, 3000);
+    CookiesSave();
 
 }
 
@@ -586,3 +749,9 @@ Body.addEventListener('keypress', function(letter) {
         CatchPokemon();
     }
 })
+
+
+/*return */
+function Return() {
+    window.open("../index.html", '_self');
+}

@@ -76,6 +76,36 @@
   }
 }
 
+@-webkit-keyframes Twinkle {
+  0% {
+    -webkit-filter: brightness(1);
+            filter: brightness(1);
+  }
+  50% {
+    -webkit-filter: brightness(2);
+            filter: brightness(2);
+  }
+  100% {
+    -webkit-filter: brightness(1);
+            filter: brightness(1);
+  }
+}
+
+@keyframes Twinkle {
+  0% {
+    -webkit-filter: brightness(1);
+            filter: brightness(1);
+  }
+  50% {
+    -webkit-filter: brightness(2);
+            filter: brightness(2);
+  }
+  100% {
+    -webkit-filter: brightness(1);
+            filter: brightness(1);
+  }
+}
+
 @-webkit-keyframes BtnScale {
   0% {
     -webkit-transform: scale(1);
@@ -637,11 +667,31 @@ audio {
   left: 35vw;
   width: 30vw;
   height: 8vh;
+  color: white;
   border-radius: 4vh;
   font-size: 1.2rem;
   text-transform: uppercase;
-  background: linear-gradient(86.51deg, #FFFFFF -14.92%, rgba(255, 0, 0, 0.79) 92.91%);
+  -webkit-box-shadow: 1px 1px 0 #001aff;
+          box-shadow: 1px 1px 0 #001aff;
+  background: -webkit-gradient(linear, left top, right top, color-stop(-43.33%, #FFFFFF), color-stop(-43.32%, #F4FF71), color-stop(121.11%, rgba(255, 92, 0, 0.79)));
+  background: linear-gradient(90deg, #FFFFFF -43.33%, #F4FF71 -43.32%, rgba(255, 92, 0, 0.79) 121.11%);
+}
+
+#return,
+#clear {
+  width: 10vw;
+  height: 10vw;
+  font-family: 'Oswald', sans-serif;
+  text-transform: uppercase;
   color: white;
+  font-size: 0.5rem;
+  text-shadow: 1px 1px 1px gray;
+  border: 1px solid #ffe600;
+  border-radius: 5vw;
+  -webkit-box-shadow: 1px 1px 0 #001aff;
+          box-shadow: 1px 1px 0 #001aff;
+  background: -webkit-gradient(linear, left top, right top, color-stop(-43.33%, #FFFFFF), color-stop(-43.32%, #F4FF71), color-stop(121.11%, rgba(255, 92, 0, 0.79)));
+  background: linear-gradient(90deg, #FFFFFF -43.33%, #F4FF71 -43.32%, rgba(255, 92, 0, 0.79) 121.11%);
 }
 
 #timer {
@@ -726,7 +776,7 @@ audio {
 }
 
 #battle-area-user-character img {
-  width: 30vw;
+  height: 35vh;
   position: absolute;
   bottom: 0;
 }
