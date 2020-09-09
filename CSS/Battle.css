@@ -1,3 +1,57 @@
+@-webkit-keyframes dialog {
+  0% {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+  }
+  30% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    opacity: 1;
+  }
+  95% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    opacity: 1;
+  }
+  96% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+    opacity: 1;
+  }
+}
+
+@keyframes dialog {
+  0% {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+  }
+  30% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    opacity: 1;
+  }
+  95% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    opacity: 1;
+  }
+  96% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+    opacity: 1;
+  }
+}
+
 @-webkit-keyframes TextDisplay {
   0% {
     -webkit-transform: translateY(200%);
@@ -602,6 +656,7 @@ audio {
 }
 
 #PH-area {
+  z-index: 20;
   margin-top: 1vh;
   width: 100vw;
   height: 16vh;
@@ -788,18 +843,19 @@ audio {
   bottom: 0;
 }
 
-#battle-area-user-character div {
-  width: 10vw;
-  height: 10vw;
-  background-image: url(../images/pokeBall.png);
-  background-repeat: no-repeat;
+#battle-area-user-character #battle-area-user-character-word {
+  color: black;
+  text-align: center;
+  line-height: 11vh;
+  background-image: url(../images/userDailogue.png);
+  width: 40vw;
+  height: 11vh;
   background-size: cover;
-  background-position: center;
   position: absolute;
-  left: 35vw;
-  bottom: 8vh;
-  -webkit-animation: BtnScale 0.3s linear infinite;
-          animation: BtnScale 0.3s linear infinite;
+  left: 10vw;
+  top: 8vh;
+  -webkit-transform: scale(0);
+          transform: scale(0);
 }
 
 #battle-area-user-pokemon {
@@ -1006,7 +1062,7 @@ audio {
 }
 
 #battle-area-com-character {
-  z-index: 5;
+  z-index: 25;
   position: absolute;
   width: 20vw;
   height: 30vh;
@@ -1014,9 +1070,26 @@ audio {
 }
 
 #battle-area-com-character img {
+  z-index: 25;
   width: 20vw;
   position: absolute;
   bottom: 0;
+}
+
+#battle-area-com-character #battle-area-com-character-word {
+  z-index: 100;
+  color: black;
+  text-align: center;
+  line-height: 11vh;
+  background-image: url(../images/comDailogue.png);
+  width: 30vw;
+  height: 12vh;
+  background-size: cover;
+  position: absolute;
+  left: -28vw;
+  top: -2vh;
+  -webkit-transform: translateX(50%) scale(0);
+          transform: translateX(50%) scale(0);
 }
 
 #battle-area-com-character button {
@@ -1033,7 +1106,7 @@ audio {
 
 #battle-area-com-pokemon img {
   position: absolute;
-  bottom: 10vh;
+  bottom: 8vh;
   right: 5vw;
   width: 18vw;
   -webkit-animation: wave 1.2s linear infinite;

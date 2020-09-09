@@ -17,6 +17,8 @@ let scorbunny = {
     attackMin: 30,
     defense: 20,
     speed: 50,
+    skipSkillName: "Mud Shot",
+    buffSkillName: "Growl",
     skipNum: 3,
     buff: 20,
     debuff: 10,
@@ -36,6 +38,8 @@ let grookey = {
     attackMin: 35,
     defense: 24,
     speed: 60,
+    skipSkillName: "Mud Shot",
+    buffSkillName: "Growl",
     skipNum: 2,
     buff: 20,
     debuff: 12,
@@ -55,6 +59,8 @@ let sobble = {
     attackMin: 35,
     defense: 30,
     speed: 70,
+    skipSkillName: "Mud Shot",
+    buffSkillName: "Growl",
     skipNum: 3,
     buff: 10,
     debuff: 15,
@@ -126,6 +132,8 @@ let userAttackMin = userPokemon.attackMin + characterBuff; //need cookie
 let userDefense = userPokemon.defense; //need cookie
 let userSpeed = userPokemon.speed - characterSpeed; //need cookie
 let userSkipNum = userPokemon.skipNum;
+let userSkipSkillName = userPokemon.skipSkillName;
+let userBuffSkillName = userPokemon.buffSkillName;
 let userBuff = userPokemon.buff;
 let userDebuff = userPokemon.debuff;
 let userSkillName = userPokemon.skillName;
@@ -187,6 +195,8 @@ let comSpiritBar = document.getElementById('timer-com-bar-current');
 let userMoveBtn = document.getElementById('battle-area-user-btn');
 let userArea = document.getElementById('battle-area-user');
 let timerDisplay = document.getElementById('timer');
+let userDailog = document.getElementById('battle-area-user-character-word');
+let comDailog = document.getElementById('battle-area-com-character-word');
 let medicine = 50;
 let j = true;
 
@@ -546,11 +556,10 @@ function UserAttack() { // user noraml attack
     comPHDamageDisplay.innerHTML = "- PH " + comDamage;
     setTimeout(() => {
         userPokemonImg.style.animation = "UserNormalAttack 1.3s linear";
+        userDailog.style.animation = "dialog 0.5s linear";
         setTimeout(() => {
-
             hit.play();
         }, 800);
-
         setTimeout(() => {
             // hit.pause();
             comPokemonImg.style.animation = "Shake 0.2s linear";
@@ -560,6 +569,7 @@ function UserAttack() { // user noraml attack
             setTimeout(() => {
                 userPokemonImg.style.animation = "wave 0.8s linear infinite";
                 comPokemonImg.style.animation = "wave 1.2s linear infinite";
+                userDailog.style.animation = "";
                 comPHDamageDisplay.style.display = "none";
                 WinnerCheck();
                 CookiesSave();
@@ -581,6 +591,7 @@ function ComAttack() { // com normal  attack
 
     setTimeout(() => {
         comPokemonImg.style.animation = "ComNormalAttack 1.3s linear";
+        comDailog.style.animation = "dialog 0.5s linear";
         setTimeout(() => {
             hit.play();
         }, 800);
@@ -594,6 +605,7 @@ function ComAttack() { // com normal  attack
                 userPokemonImg.style.animation = "wave 0.8s linear infinite";
                 comPokemonImg.style.animation = "wave 1.2s linear infinite";
                 userPHDamageDisplay.style.display = "none";
+                comDailog.style.animation = "none";
                 console.log(userPokemonImg);
                 WinnerCheck();
                 CookiesSave();
@@ -602,6 +614,9 @@ function ComAttack() { // com normal  attack
         }, 1100);
     }, 500);
 }
+
+
+
 /* user skill attack */
 function UserSkillAttack() {
     StopRoundCheck();
@@ -623,12 +638,15 @@ function UserSkillAttack() {
     comPHDamageDisplay.innerHTML = "- PH " + comDamage;
     UserSpiritCheck();
     setTimeout(() => {
+        userDailog.innerHTML = userSkillName;
+        userDailog.style.animation = "dialog 1s linear";
         Evo();
         userPokemonImg.style.animation = "evolution 1s linear";
         userPokemonImg.src = userLevelThreeImg;
         setTimeout(() => {
             userPokemonImg.src = userSkillImg;
             userPokemonImg.style.animation = "ScorbunnySkill 1.5s linear";
+
             setTimeout(() => {
                 SkillHit.play();
             }, 800);
@@ -642,6 +660,8 @@ function UserSkillAttack() {
                     userPokemonImg.style.animation = "wave 0.8s linear infinite";
                     comPokemonImg.style.animation = "wave 1.2s linear infinite";
                     comPHDamageDisplay.style.display = "none";
+                    userDailog.innerHTML = ATTACK;
+                    userDailog.style.animation = "none";
                     WinnerCheck();
                     CookiesSave();
                     setTimeout(TimerStart, 500);
@@ -679,16 +699,22 @@ function UserStopAttack() {
     comSpeed = 100000000;
     userRestStopRound = userSkipNum;
     console.log(comSpeed);
+    userDailog.innerHTML = userSkipSkillName;
+    userDailog.style.animation = "dialog 1s linear";
     StopRoundCheck();
     ComHealthDisplay();
     UserSpiritCheck();
     CookiesSave();
-    setTimeout(TimerStart, 2000);
+    setTimeout(() => {
+        userDailog.innerHTML = "ATTACK";
+        userDailog.style.animation = "none";
+        TimerStart();
+    }, 2000);
 }
+
 
 /* buff attack */
 function UserBuffAttack() {
-
     if (userRestBuffRound >= 0) {
         comAttriChangeDisplay.style.display = "block";
         comAttriChangeDisplay.innerHTML = "You can not repeat the Buff";
@@ -708,6 +734,8 @@ function UserBuffAttack() {
         setTimeout(() => {
             comAttriChangeDisplay.style.display = "block";
             comTextInfo.style.animation = "TextDisplay 1s linear";
+            userDailog.innerHTML = userBuffSkillName;
+            userDailog.style.animation = "dialog 1s linear";
             comAttriChangeDisplay.innerHTML = "- Defense" + userDebuff;
             userAttriChangeDisplay.style.display = "block";
             userTextInfo.style.animation = "TextDisplay 1s linear";
@@ -716,12 +744,50 @@ function UserBuffAttack() {
             setTimeout(() => {
                 comAttriChangeDisplay.style.display = "none";
                 userAttriChangeDisplay.style.display = "none";
+                userDailog.innerHTML = "ATTACK";
+                userDailog.style.animation = "none";
                 CookiesSave();
                 setTimeout(TimerStart, 500);
             }, 900);
         }, 500);
     }
 }
+
+/* buff attack */
+// function ComBuffAttack() {
+//     if (comRestBuffRound >= 0) {
+//         userAttriChangeDisplay.style.display = "block";
+//         userAttriChangeDisplay.innerHTML = "You can not repeat the Buff";
+//         setTimeout(() => {
+//             userAttriChangeDisplay.style.display = "none";
+//         }, 1000);
+//     } else {
+//         moveAction();
+//         comSpiritCheck();
+//         comAttackMax = comAttackMax + comBuff;
+//         comAttackMin = comAttackMin + comBuff;
+//         userDefense = userDefense - comDebuff;
+//         comRestBuffRound = 3;
+//         if (userDefense <= 0) {
+//             userDefense = 0;
+//         }
+//         setTimeout(() => {
+//             userAttriChangeDisplay.style.display = "block";
+//             userTextInfo.style.animation = "TextDisplay 1s linear";
+//             userAttriChangeDisplay.innerHTML = "- Defense" + comDebuff;
+//             comAttriChangeDisplay.style.display = "block";
+//             comTextInfo.style.animation = "TextDisplay 1s linear";
+//             comAttriChangeDisplay.innerHTML = "+ Attack" + comBuff
+//             userHealthDisplay();
+//             setTimeout(() => {
+//                 userAttriChangeDisplay.style.display = "none";
+//                 comAttriChangeDisplay.style.display = "none";
+//                 CookiesSave();
+//                 setTimeout(TimerStart, 500);
+//             }, 900);
+//         }, 500);
+//     }
+// }
 /*healing */
 function UserHealing() {
     StopRoundCheck();
@@ -732,11 +798,15 @@ function UserHealing() {
         userPHcurrent = userPHmax;
     }
     setTimeout(() => {
+        userDailog.innerHTML = "HEALING";
+        userDailog.style.animation = "dialog 0.7s linear";
         userPHDamageDisplay.style.display = "block";
         userTextInfo.style.animation = "TextDisplay 1s linear";
         userPHDamageDisplay.innerHTML = "+ PH" + medicine;
         setTimeout(() => {
             userPHDamageDisplay.style.display = "none";
+            userDailog.innerHTML = "ATTACK";
+            userDailog.style.animation = "NONE";
         }, 900);
         UserHealthDisplay();
         UserSpiritCheck();
