@@ -1,5 +1,6 @@
 let userCharacter;
 let userPokemon;
+let j = true;
 userCharacter = Cookies.get('UserCharacterCookie');
 userPokemon = Cookies.get('UserPokemonCookie');
 defaultDisplay();
@@ -101,4 +102,15 @@ function Clear() {
     Cookies.remove('comAttackMin');
     Cookies.remove('comDefense');
     Cookies.remove('comSpeed');
+}
+
+function Audio() {
+    console.log(document.getElementById('audio'));
+    if (j === true) {
+        document.getElementById('audio').style.display = "block";
+        j = false;
+    } else if (j === false) {
+        document.getElementById('audio').style.display = "none";
+        j = true;
+    }
 }

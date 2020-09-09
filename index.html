@@ -11,8 +11,10 @@
 </head>
 
 <body id="Body">
+    <audio id="audio" autoplay controls>
+        <source src="https://vgmdownloads.com/soundtracks/pokemon-sword-shield-ost/kqugqqvysy/3-26%20Pok%C3%A9mon%20Center.mp3" type="audio/ogg"></audio>
     <div id="background">
-        <h1>Select Your <br> Character & Pokemon</h1>
+        <h1 onclick="Audio()">Select Your <br> Character & Pokemon</h1>
         <div id="characterSelect">
             <img src="./images/characterM.png" alt="" id="Victor" value="Victor" onclick="CharacterSelect('Victor')">
             <img src="./images/characterF.png" alt="" id="Gloria" value="Gloria" onclick="CharacterSelect('Gloria')">

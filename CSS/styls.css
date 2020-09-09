@@ -582,6 +582,13 @@ body {
   background-position: center;
 }
 
+body #audio {
+  z-index: 100;
+  opacity: 0.7;
+  position: absolute;
+  display: none;
+}
+
 #background {
   height: 94vh;
   display: -ms-grid;
@@ -596,6 +603,7 @@ body {
 }
 
 #background h1 {
+  width: 100%;
   text-transform: uppercase;
   font-family: 'Oswald', sans-serif;
   font-size: 1.5rem;

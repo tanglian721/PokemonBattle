@@ -13,6 +13,8 @@
 <body id="Body">
     <audio id="audio" controls autoplay>
         <source src="https://vgmdownloads.com/soundtracks/pokemon-sword-shield-ost/lwuhtfzmom/1-01%20Battle%21%20%28Wild%20Pok%C3%A9mon%29.mp3" type="audio/ogg"></audio>
+    <audio src="./sound/hit.mp3" id="hit" volume="10"></audio>
+    <audio src="./sound/skill.mp3" id="skillhit" volume="10"></audio>
     <div id="background">
         <!-- health point display-->
         <div id="PH-area" onclick="Audio()">
@@ -50,7 +52,7 @@
 
         <button id="start-battle" onclick="TimerStart()">start battle</button>
         <button id="return" onclick="Return()">Return</button>
-        <button id="clear" onclick="Clear2()">Reset</button>
+        <button id="bgm">BGM</button>
         <div id="battle">
             <div id="battle-area-user" class="battle-area">
                 <div id="battle-area-user-character" class="battle-area-character">

@@ -68,8 +68,8 @@ let sobble = {
 }
 let kubfu = {
     name: 'kubfu',
-    PHmax: 250,
-    attackMax: 90,
+    PHmax: 280,
+    attackMax: 100,
     attackMin: 40,
     defense: 20,
     speed: 70,
@@ -190,6 +190,14 @@ let timerDisplay = document.getElementById('timer');
 let medicine = 50;
 let j = true;
 
+/* delcare sound effect */
+let BGM = document.getElementById('audio');
+let BGMPlay = true;
+let hit = document.getElementById('hit');
+let skillhit = document.getElementById('skillhit');
+console.log(hit);
+
+
 function Audio() {
     console.log(document.getElementById('audio'));
     if (j === true) {
@@ -200,8 +208,21 @@ function Audio() {
         j = true;
     }
 }
+let p = document.getElementById('bgm');
+console.log(p);
+p.addEventListener('click', ControlBGM);
 
-
+function ControlBGM() {
+    if (BGMPlay === true) {
+        console.log(BGMPlay);
+        BGM.pause();
+        // BGM.load();
+        BGMPlay = false;
+    } else if (BGMPlay === false) {
+        BGM.play();
+        BGMPlay = true;
+    }
+}
 /* reading cookies */
 console.log(Cookies.get('userPHcurrent'));
 if (Cookies.get('userPHcurrent') !== undefined) {
@@ -526,6 +547,12 @@ function UserAttack() { // user noraml attack
     setTimeout(() => {
         userPokemonImg.style.animation = "UserNormalAttack 1.3s linear";
         setTimeout(() => {
+
+            hit.play();
+        }, 800);
+
+        setTimeout(() => {
+            // hit.pause();
             comPokemonImg.style.animation = "Shake 0.2s linear";
             comPHDamageDisplay.style.display = "block";
             comTextInfo.style.animation = "TextDisplay 1s linear";
@@ -554,6 +581,9 @@ function ComAttack() { // com normal  attack
 
     setTimeout(() => {
         comPokemonImg.style.animation = "ComNormalAttack 1.3s linear";
+        setTimeout(() => {
+            hit.play();
+        }, 800);
         setTimeout(() => {
             userPokemonImg.style.animation = "Shake 0.2s linear";
             userPHDamageDisplay.style.display = "block";
@@ -599,6 +629,9 @@ function UserSkillAttack() {
         setTimeout(() => {
             userPokemonImg.src = userSkillImg;
             userPokemonImg.style.animation = "ScorbunnySkill 1.5s linear";
+            setTimeout(() => {
+                SkillHit.play();
+            }, 800);
             setTimeout(() => {
                 comPokemonImg.style.animation = "Shake 0.2s linear";
                 comPHDamageDisplay.style.display = "block";
@@ -754,4 +787,21 @@ Body.addEventListener('keypress', function(letter) {
 /*return */
 function Return() {
     window.open("../index.html", '_self');
+    Cookies.remove('UserCharacterCookie');
+    Cookies.remove('UserPokemonCookie');
+    Cookies.remove('userPHcurrent');
+    Cookies.remove('userAttackMax');
+    Cookies.remove('userAttackMin');
+    Cookies.remove('userDefense');
+    Cookies.remove('userSpeed');
+    Cookies.remove('userSpiritPoint');
+    Cookies.remove('userRestStopRound');
+    Cookies.remove('userRestBuffRound');
+    Cookies.remove('comPHcurrent');
+    Cookies.remove('comAttackMax');
+    Cookies.remove('comAttackMin');
+    Cookies.remove('comDefense');
+    Cookies.remove('comSpeed');
+    Cookies.remove('userTimerNum');
+    Cookies.remove('comTimerNum');
 }

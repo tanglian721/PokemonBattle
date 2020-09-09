@@ -678,7 +678,7 @@ audio {
 }
 
 #return,
-#clear {
+#bgm {
   width: 10vw;
   height: 10vw;
   font-family: 'Oswald', sans-serif;
@@ -692,6 +692,12 @@ audio {
           box-shadow: 1px 1px 0 #001aff;
   background: -webkit-gradient(linear, left top, right top, color-stop(-43.33%, #FFFFFF), color-stop(-43.32%, #F4FF71), color-stop(121.11%, rgba(255, 92, 0, 0.79)));
   background: linear-gradient(90deg, #FFFFFF -43.33%, #F4FF71 -43.32%, rgba(255, 92, 0, 0.79) 121.11%);
+}
+
+#bgm {
+  position: relative;
+  top: 10vw;
+  left: -11vw;
 }
 
 #timer {
@@ -746,6 +752,7 @@ audio {
   position: absolute;
   left: 10vw;
   bottom: 0;
+  overflow: hidden;
 }
 
 #battle p {
