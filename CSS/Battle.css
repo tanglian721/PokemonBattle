@@ -388,8 +388,8 @@
             transform: scale(1.2) translate(0, 0);
   }
   70% {
-    -webkit-transform: scale(0.8) translate(-20%, -100%);
-            transform: scale(0.8) translate(-20%, -100%);
+    -webkit-transform: scale(0.8) translate(-20%, -150%);
+            transform: scale(0.8) translate(-20%, -150%);
   }
   40% {
     -webkit-transform: scale(1) translate(0, 0);
@@ -407,8 +407,8 @@
             transform: scale(1.2) translate(0, 0);
   }
   70% {
-    -webkit-transform: scale(0.8) translate(-20%, -100%);
-            transform: scale(0.8) translate(-20%, -100%);
+    -webkit-transform: scale(0.8) translate(-20%, -150%);
+            transform: scale(0.8) translate(-20%, -150%);
   }
   40% {
     -webkit-transform: scale(1) translate(0, 0);
@@ -734,6 +734,7 @@ audio {
 
 #return,
 #bgm {
+  z-index: 10;
   width: 10vw;
   height: 10vw;
   font-family: 'Oswald', sans-serif;
@@ -1125,6 +1126,7 @@ audio {
 }
 
 section {
+  z-index: 1;
   width: 100vw;
   height: 60vh;
   display: -ms-grid;
@@ -1139,6 +1141,7 @@ section {
 
 section p,
 section span {
+  z-index: 1;
   font-family: 'Signika', sans-serif;
   font-size: 2rem;
   color: white;
@@ -1147,6 +1150,7 @@ section span {
 }
 
 section img {
+  z-index: 1;
   width: 30vw;
 }
 /*# sourceMappingURL=Battle.css.map */

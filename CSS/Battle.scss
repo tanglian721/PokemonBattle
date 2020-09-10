@@ -108,6 +108,7 @@ audio {
 
 #return,
 #bgm {
+    z-index: 10;
     width: 10vw;
     height: 10vw;
     font-family: 'Oswald', sans-serif;
@@ -451,6 +452,7 @@ audio {
 }
 
 section {
+    z-index: 1;
     width: 100vw;
     height: 60vh;
     display: grid;
@@ -460,6 +462,7 @@ section {
     top: 20vh;
     p,
     span {
+        z-index: 1;
         font-family: 'Signika', sans-serif;
         font-size: 2rem;
         color: white;
@@ -467,6 +470,7 @@ section {
         text-transform: uppercase;
     }
     img {
+        z-index: 1;
         width: 30vw;
     }
 }

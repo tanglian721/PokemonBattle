@@ -69,7 +69,7 @@ let sobble = {
     levelOneImgPath: '../images/sobble-level1.png',
     levelTwoImgPath: '../images/sobble-level2.png',
     levelThreeImgPath: '../images/sobble-level3.png',
-    skillImgPath: '../images/sobble-final.png',
+    skillImgPath: '../images/sobble-level3.png',
     backGroundPath: '../images/battle3Backgroud.jpg'
 }
 let kubfu = {
@@ -204,7 +204,7 @@ let j = true;
 let BGM = document.getElementById('audio');
 let BGMPlay = true;
 let hit = document.getElementById('hit');
-let skillhit = document.getElementById('skillhit');
+let skillHit = document.getElementById('skillhit');
 console.log(hit);
 
 
@@ -646,9 +646,8 @@ function UserSkillAttack() {
         setTimeout(() => {
             userPokemonImg.src = userSkillImg;
             userPokemonImg.style.animation = "ScorbunnySkill 1.5s linear";
-
             setTimeout(() => {
-                SkillHit.play();
+                skillHit.play();
             }, 800);
             setTimeout(() => {
                 comPokemonImg.style.animation = "Shake 0.2s linear";
@@ -660,7 +659,7 @@ function UserSkillAttack() {
                     userPokemonImg.style.animation = "wave 0.8s linear infinite";
                     comPokemonImg.style.animation = "wave 1.2s linear infinite";
                     comPHDamageDisplay.style.display = "none";
-                    userDailog.innerHTML = ATTACK;
+                    userDailog.innerHTML = "ATTACK";
                     userDailog.style.animation = "none";
                     WinnerCheck();
                     CookiesSave();
